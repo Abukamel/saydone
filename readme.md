@@ -4,6 +4,7 @@ is done by sending a message with command output.
 Currently it supports notfying via slack, hipchat and email.
 ## Installation
 - `sudo curl -fLo /usr/local/bin/saydone https://github.com/Abukamel/saydone/releases/download/v0.1/saydone && sudo chmod +x /usr/local/bin/saydone`
+
 ## Usage
 - Export notification services environment variables.
 	- `export HIPCHAT_AUTHTOKEN=your_hipchat_auth_token`
