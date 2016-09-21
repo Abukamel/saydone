@@ -37,6 +37,8 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "saydone"
 	app.Usage = "Runs a shell script and notify back when it's done"
+	app.Version = "0.1"
+	app.Author = "Ahmed Kamel"
 	app.Action = func(c *cli.Context) error {
 
 		// Show help if no Args passed.
@@ -45,6 +47,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+			return nil
 		}
 
 		// Run your command line arguments after saydone and
