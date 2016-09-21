@@ -26,7 +26,7 @@ type NotificationInfo struct {
 }
 
 func main() {
-	// Storing exported hipchat environment variables into nInfo
+	// Storing exported hipchat environment variables into notificationInfo.
 	var notificationInfo NotificationInfo
 	err := env.Parse(&notificationInfo)
 	if err != nil {
