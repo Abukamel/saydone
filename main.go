@@ -39,6 +39,14 @@ func main() {
 	app.Usage = "Runs a shell script and notify back when it's done"
 	app.Action = func(c *cli.Context) error {
 
+		// Show help if no Args passed.
+		if c.NArg() == 0 {
+			err := cli.ShowAppHelp(c)
+			if err != nil {
+				panic(err)
+			}
+		}
+
 		// Run your command line arguments after saydone and
 		// store output into out variable.
 		out, err := sh.Command(c.Args().First(), c.Args().Tail()).CombinedOutput()
