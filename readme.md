@@ -19,7 +19,13 @@ Currently it supports notfying via slack, hipchat and email.
 - It will send a notification after command is done with command output combining stdout and stderr in notification message.
 
 It will recognize the authentication to supported services via GLOBAL VARIABLES.
-So you should export needed variables or put them in your /etc/profile, ~/.bash_profile,
-~/.bashrc for permanent use or user export command for current session use e.g 
-export "golabl_var=value" or you can prepend them before the command "saydone" for
-a command only scope e.g global_var=value saydone ls -ltrha /home
+
+So you should export needed variables or put them in your `/etc/profile`, `~/.bash_profile` 
+or `~/.bashrc` for permanent use.
+
+or use export command for current session use e.g.
+`export "golabl_var=value"`.
+
+or you can prepend them before the command `saydone` for
+a command only scope.
+e.g. `global_var=value saydone ls -ltrha /home`
