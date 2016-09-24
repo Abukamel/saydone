@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/bluele/slack"
 	"github.com/caarlos0/env"
@@ -81,7 +82,7 @@ func appAction(c *cli.Context) error {
 
 	// Run your command line arguments after saydone and
 	// store output into cmdOutput variable.
-	cmdOutput, err := sh.Command(c.Args().First(), c.Args().Tail()).CombinedOutput()
+	cmdOutput, err := sh.Command(c.Args().First(), c.Args().Tail()).SetTimeout(time.Hour * 24).CombinedOutput()
 	if err != nil {
 		logger.Println(err)
 		return err
