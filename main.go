@@ -1,7 +1,7 @@
 // This is a command line wrapper for shell/bash commands that will
 // Send a notification when command execution is done so that you
 // can fire any long command and do whatever you want then get notified
-// when command execution is done via HipChat, Slack and Email.
+// when command execution is done via HipChat and Slack.
 package main
 
 import (
@@ -27,7 +27,6 @@ var (
 type notificator struct {
 	HipChatAuthToken string `env:"HIPCHAT_AUTHTOKEN"` // HipChat API Authentication Token.
 	HipChatUser      string `env:"HIPCHAT_USER"`      // HipChatUser to be notified.
-	SayDoneEmail     string `env:"SAYDONE_EMAIL"`     // Email address to be notified.
 	SlackAuthToken   string `env:"SLACK_AUTHTOKEN"`   // Slack API Authentication Token.
 	SlackUser        string `env:"SLACK_USER"`        // SlackUser to be notified.
 }
@@ -74,7 +73,7 @@ func appAction(c *cli.Context) error {
 	}
 
 	// Check if all required env vars are not set and stop program execution if they are.
-	if n.HipChatAuthToken == "" && n.SlackAuthToken == "" && n.SayDoneEmail == "" {
+	if n.HipChatAuthToken == "" && n.SlackAuthToken == "" {
 		fmt.Println("Environment vars are not set, Please set at least one endpoint vars for the application to work.")
 		fmt.Println("Exiting...")
 		os.Exit(1)
@@ -112,28 +111,8 @@ func appAction(c *cli.Context) error {
 		logger.Println(err)
 	}
 
-	// Notify email
-	err = n.email(notificationMsg, serverHostname)
-	if err != nil {
-		fmt.Println(err)
-		logger.Println(err)
-	}
-
 	// Finally sending command output to terminal stdout.
 	fmt.Fprintf(os.Stdout, string(cmdOutput))
-	return nil
-}
-
-// email is a method that takes message string and server hostname and sends an email
-// with executed command output put to specified email in env var.
-func (n notificator) email(msg, hname string) error {
-	// Send an email notification if environment variable is set.
-	// I have used sh command mail because of problems regarding certificate verification with golang net/smtp package.
-	_, err := sh.Command("echo", msg).Command("mail", "-s", fmt.Sprintf("Command execution done at %s", hname), n.SayDoneEmail).CombinedOutput()
-	if err != nil {
-		logger.Println(err)
-		return errors.New("Failed to send msg to email, Please check your env vars.")
-	}
 	return nil
 }
 

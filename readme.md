@@ -1,7 +1,7 @@
 ## Description
 This is a command wrapper that will notify you when a shell command execution
 is done by sending a message with command output.
-Currently it supports notfying via slack, hipchat and email.
+Currently it supports notfying via slack and hipchat.
 ## Installation
 - `sudo curl -fLo /usr/local/bin/saydone https://github.com/Abukamel/saydone/releases/download/v0.1/saydone && sudo chmod +x /usr/local/bin/saydone`
 
@@ -11,7 +11,6 @@ Currently it supports notfying via slack, hipchat and email.
 	- `export HIPCHAT_USER=hipchat_user_to_be_notified`
 	- `export SLACK_AUTHTOKEN=your_slack_auth_token`
 	- `export SLACK_USER=slack_user_to_be_notified`
-	- `export SAYDONE_EMAIL=email_address_to_receive_notifications`
 - You can add global variables to your .bashrc file for persistency.
 - Command Usage:
 	- `saydone yourCommand yourCommandOptions yourCommandArgs`
